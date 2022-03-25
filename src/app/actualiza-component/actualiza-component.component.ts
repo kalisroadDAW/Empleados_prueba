@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Empleado } from '../empleado.model';
 import { EmpleadosService } from '../empleados.service';
 import { ServicioEmpleadosService } from '../servicio-empleados.service';
@@ -12,10 +12,19 @@ import { ServicioEmpleadosService } from '../servicio-empleados.service';
 export class ActualizaComponentComponent implements OnInit {
   empleados: Empleado[];
 
-  constructor(private router:Router,private miServicio:ServicioEmpleadosService, private empleadosService:EmpleadosService) { }
+  constructor(private router:Router,private miServicio:ServicioEmpleadosService, private empleadosService:EmpleadosService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.empleados=this.empleadosService.empleados;
+    this.indice=this.route.snapshot.params['id'];
+    let empleado:Empleado=this.empleadosService.encontrarEmpleado(this.indice);
+
+    this.cuadroNombre=empleado.nombre;
+    this.cuadroApellidos=empleado.apellidos;
+    this.cuadroCargo=empleado.cargo;
+    this.cuadroSueldo=empleado.sueldo;
+
+
   }
 
   volverHome(){
@@ -24,13 +33,15 @@ export class ActualizaComponentComponent implements OnInit {
 
   }
 
-  agregarEmpleado(){
+  actualizaEmpleado(){
 
     let miempleado=new Empleado(this.cuadroNombre,this.cuadroApellidos,this.cuadroCargo,this.cuadroSueldo);
 
     this.miServicio.avisa_del_registro("Nombre del empleado" + miempleado.nombre);
 
-    this.empleadosService.agregarEmpleadoServicio(miempleado);
+    this.empleadosService.actualizarEmpleado(this.indice,miempleado);
+
+    
 
     this.router.navigate([''])
 
@@ -39,11 +50,29 @@ export class ActualizaComponentComponent implements OnInit {
     
 }
 
+eliminaEmpleado(){
+
+  let miempleado=new Empleado(this.cuadroNombre,this.cuadroApellidos,this.cuadroCargo,this.cuadroSueldo);
+
+  this.miServicio.avisa_del_registro("Usuario eliminado" + miempleado.nombre);
+
+  this.empleadosService.eliminarEmpleado(this.indice,miempleado);
+
+  
+
+  this.router.navigate([''])
+
+  
+
+  
+}
+
 
   cuadroNombre:string="";
   cuadroApellidos:string="";
   cuadroCargo:string="";
   cuadroSueldo:number=0;
+  indice:number;
 
   
 }  

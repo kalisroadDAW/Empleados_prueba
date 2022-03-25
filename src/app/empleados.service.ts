@@ -5,6 +5,7 @@ import { ServicioEmpleadosService } from "./servicio-empleados.service";
 @Injectable()
 
 export class EmpleadosService{
+    
 
     constructor(private servicioVentana:ServicioEmpleadosService){
 
@@ -24,4 +25,54 @@ export class EmpleadosService{
 
         this.empleados.push(empleado);
     }
+
+    encontrarEmpleado(indice:number){
+
+        let empleado:Empleado=this.empleados[indice];
+
+        return empleado;
+
+    }
+
+    actualizarEmpleado(indice:number,empleado:Empleado){
+
+        let empleadoModificado=this.empleados[indice];
+
+        empleadoModificado.nombre=empleado.nombre;
+
+        empleadoModificado.apellidos=empleado.apellidos;
+
+        empleadoModificado.cargo=empleado.cargo
+
+        empleadoModificado.sueldo=empleado.sueldo;
+
+        
+    }
+
+    eliminarEmpleado(indice:number,empleado:Empleado){
+
+        this.empleados.splice(indice,1);
+
+        
+        
+
+        /*empleado.nombre='';
+
+        empleado.apellidos='';
+
+        empleado.cargo='';
+
+        empleado.sueldo=0;
+
+        empleadoModificado.nombre=empleado.nombre;
+
+        empleadoModificado.apellidos=empleado.apellidos;
+
+        empleadoModificado.cargo=empleado.cargo
+
+        empleadoModificado.sueldo=empleado.sueldo;
+
+        
+    */}
+    
 }

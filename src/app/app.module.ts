@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -15,6 +15,7 @@ import { QuienescomponentComponent } from './quienescomponent/quienescomponent.c
 import { ContactocomponentComponent } from './contactocomponent/contactocomponent.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ActualizaComponentComponent } from './actualiza-component/actualiza-component.component';
+import { ErrorpersonComponent } from './errorperson/errorperson.component';
 
 const appRoutes:Routes=[
 
@@ -22,7 +23,8 @@ const appRoutes:Routes=[
   {path:'proyectos',component:ProyectoscomponentComponent},
   {path:'quienes',component:QuienescomponentComponent},
   {path:'contacto',component:ContactocomponentComponent},
-  {path:'actualiza/:id',component:ActualizaComponentComponent,},
+  {path:'actualiza/:id',component:ActualizaComponentComponent},
+  {path:'**',component:ErrorpersonComponent}
 
 
 

@@ -1,4 +1,10 @@
 export class Empleado {
+    pop() {
+        throw new Error("Method not implemented.");
+    }
+    splice(arg0: string) {
+        throw new Error("Method not implemented.");
+    }
 
     nombre:string="";
     apellidos:string="";
